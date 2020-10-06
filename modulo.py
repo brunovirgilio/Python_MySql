@@ -1,5 +1,8 @@
 import pymysql
 import PySimpleGUI as sg
+from database import *
+
+
 
 class Tela:
     def __init__(self):
