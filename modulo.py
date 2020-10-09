@@ -3,14 +3,13 @@ import PySimpleGUI as sg
 from database import *
 
 
-
 class Tela:
     def __init__(self):
         #layout
         layout = [
-            [sg.Text('Nome Completo', size=(16,0)),sg.Input(key='nome')],
-            [sg.Text('Apartamento', size=(16,0)),sg.Input(key='apt')],
-            [sg.Text('Qnt de moradores', size=(16,0)),sg.Input(key='qnt')],
+            [sg.Text('Nome Completo', size=(16,0)),sg.Input(key='linha1')],
+            [sg.Text('Apartamento', size=(16,0)),sg.Input(key='linha2')],
+            [sg.Text('Qnt de moradores', size=(16,0)),sg.Input(key='linha3')],
             [sg.Text('Possui veículo?', size=(16,0))],
             [sg.Checkbox('Sim',key='sim'),sg.Checkbox('Não',key='nao')],
             [sg.Button('Enviar')]            
@@ -21,16 +20,25 @@ class Tela:
         self.Button, self.values = janela.Read()
 
     def iniciar(self):
-        nome =self.values['nome']
-        apt = self.values['apt']
-        qnt = self.values['qnt']
-        vsim = self.values['sim']
-        vnao = self.values['nao']
-        print(f'nome: {nome}')
-        print(f'apt: {apt}')
-        print(f'qnt: {qnt}')
-        print(f'veiculo sim: {vsim}')
-        print(f'veiculo nao: {vnao}')
+        n = self.values['linha1']
+        a = self.values['linha2']
+        q = self.values['linha3']
+        vs = self.values['sim']
+        vn = self.values['nao']
+        print(f'nome: {n}')
+        print(f'apt: {a}')
+        print(f'qnt: {q}')
+        print(f'veiculo sim: {vs}')
+        print(f'veiculo nao: {vn}')
+        cursor = conexao.cursor()
+        incluir = 'INSERT TO morador(nome, apt, qnt, vsim,vnao)VALUES(%s, %s, %s, %s, %s)'
+        valor = [
+            (str(n),str(a),str(q),str(vs),str(vn))
+        ]
+        cursor.execute(incluir,valor)
+        
+        conexao.commit()
+        print(cursor.rowcount,'Inserido com Sucesso')
 
     
 
