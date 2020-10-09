@@ -25,20 +25,19 @@ class Tela:
         q = self.values['linha3']
         vs = self.values['sim']
         vn = self.values['nao']
+        
+        cursor = conexao.cursor()
+        incluir = 'INSERT INTO morador(nome, apt, qnt, vsim,vnao)VALUES(%s, %s, %s, %s, %s)'
+        valor =(str(n),str(a),str(q),bool(vs),bool(vn))
+
+        cursor.execute(incluir,valor)
+        conexao.commit()
+        
         print(f'nome: {n}')
         print(f'apt: {a}')
         print(f'qnt: {q}')
         print(f'veiculo sim: {vs}')
         print(f'veiculo nao: {vn}')
-        cursor = conexao.cursor()
-        incluir = 'INSERT TO morador(nome, apt, qnt, vsim,vnao)VALUES(%s, %s, %s, %s, %s)'
-        valor = [
-            (str(n),str(a),str(q),str(vs),str(vn))
-        ]
-        cursor.execute(incluir,valor)
-        
-        conexao.commit()
-        print(cursor.rowcount,'Inserido com Sucesso')
 
     
 
