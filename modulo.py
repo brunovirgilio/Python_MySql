@@ -12,7 +12,7 @@ class Tela:
             [sg.Text('Qnt de moradores', size=(16,0)),sg.Input(key='linha3')],
             [sg.Text('Possui veículo?', size=(16,0))],
             [sg.Checkbox('Sim',key='sim'),sg.Checkbox('Não',key='nao')],
-            [sg.Button('Incluir'),sg.Button('Excluir'),sg.Button('Exibir Lista'),sg.Button('Limpar Tela')],
+            [sg.Button('Incluir',key='incluir'),sg.Button('Excluir',key='excluir'),sg.Button('Exibir Lista',key='exibir'),sg.Button('Limpar Tela',key='limpar')],
             [sg.Output(size=(60,10))]            
         ]
         #janela
@@ -22,7 +22,8 @@ class Tela:
         while True:
             #extração
             self.Button, self.values = self.janela.Read()
-            if self.Button == 'Incluir':
+      
+            if self.Button == 'incluir':
                 n = self.values['linha1']
                 a = self.values['linha2']
                 q = self.values['linha3']
@@ -42,8 +43,15 @@ class Tela:
                 print(f'veiculo sim: {vs}')
                 print(f'veiculo nao: {vn}')
             
-            elif self.Button == 'Limpar Tela':
-                self.values['linha1'].update(value=' ')
+            elif self.Button == 'limpar':
+                self.result = 0
+                self.values['linha1'].update(value=self.result)
+                self.values['linha2'].update(value=self.result)
+                self.values['linha3'].update(value=self.result)
+                self.values['sim'].update(value=self.result)
+                self.values['nao'].update(value=self.result)
+
+                 
                 
 
                
