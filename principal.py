@@ -1,9 +1,10 @@
 from modulo import Tela
 
 
-sistema = Tela()
-sistema.iniciar()
-
+while True:
+    sistema = Tela()
+    sistema.iniciar()
+    
 
 
 
