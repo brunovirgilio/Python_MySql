@@ -45,7 +45,7 @@ while True:
         window['linha1'].clear()
         window['linha2'].clear()
         window['linha3'].clear()
-
+.
 window.close()
             
             
