@@ -42,9 +42,8 @@ while True:
         print(f'veiculo nao: {vn}')
 
     if event == 'limpar':
-        window['linha1'].clear()
-        window['linha2'].clear()
-        window['linha3'].clear()
+        window['linha1'].update()
+   
 
 window.close()
             
