@@ -41,21 +41,6 @@ while True:
         print(f'veiculo sim: {vs}')
         print(f'veiculo nao: {vn}')
 
-    if event == 'excluir':
-        n = values['linha1']
-        a = values['linha2']
-        q = values['linha3']
-        vs = values['sim']
-        vn = values['nao']
-        
-        cursor = conexao.cursor()
-        excluir = '''delete from morador WHERE nome = n'''
-       
-        cursor.execute(excluir)
-        conexao.commit()
-        print('DADO EXCLUIDO')
-
-
             
             
 
