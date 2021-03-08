@@ -10,7 +10,7 @@ layout = [
     [sg.Text('Qnt de moradores', size=(16,0)),sg.Input(key='linha3')],
     [sg.Text('Possui veículo?', size=(16,0))],
     [sg.Checkbox('Sim',key='sim'),sg.Checkbox('Não',key='nao')],
-    [sg.Button('Incluir',key='incluir'),sg.Button('Excluir',key='excluir'),sg.Button('Exibir Lista',key='exibir'),sg.Button('Limpar Tela',key='limpar')],
+    [sg.Button('Incluir',key='incluir')],
     [sg.Output(size=(60,10))]
     ]
 #janela
