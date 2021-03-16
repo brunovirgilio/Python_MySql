@@ -9,12 +9,11 @@ layout = [
     [sg.Text('Qnt de moradores', size=(16,0)),sg.Input(key='linha3')],
     [sg.Text('Possui veículo?', size=(16,0))],
     [sg.Checkbox('Sim',key='sim'),sg.Checkbox('Não',key='nao')],
-    [sg.Button('Incluir',key='incluir')],
-    [sg.Button('Deletar',key='deletar')],
+    [sg.Button('Incluir',key='incluir'), sg.Button('Deletar',key='deletar'), sg.Button('Exibir Lista',key='exibir')],
     [sg.Output(size=(60,10))]
     ]
 #janela
-janela = sg.Window('Dados Morador').layout(layout)
+janela = sg.Window('Lista de Moradores').layout(layout)
         
 while True:      
     event, values = janela.Read()
@@ -50,6 +49,19 @@ while True:
         cursor.execute(delete)
         conexao.commit()
         print('Dado excluido')
+
+    if event == 'exibir':
+        n = values['linha1']
+        
+        cursor = conexao.cursor()
+        exibe = ' SELECT * FROM morador'
+        
+        cursor.execute(exibe)
+        resultado = cursor.fetchall()
+        
+        print('Lista de Moradores')
+        for c in resultado :
+            print(c)
       
 
 
