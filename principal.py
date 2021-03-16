@@ -3,7 +3,6 @@ import PySimpleGUI as sg
 from database import *
 
 
-
 layout = [
     [sg.Text('Nome Completo', size=(16,0)),sg.Input(key='linha1')],
     [sg.Text('Apartamento', size=(16,0)),sg.Input(key='linha2')],
@@ -11,6 +10,7 @@ layout = [
     [sg.Text('Possui veículo?', size=(16,0))],
     [sg.Checkbox('Sim',key='sim'),sg.Checkbox('Não',key='nao')],
     [sg.Button('Incluir',key='incluir')],
+    [sg.Button('Deletar',key='deletar')],
     [sg.Output(size=(60,10))]
     ]
 #janela
@@ -40,6 +40,18 @@ while True:
         print(f'qnt: {q}')
         print(f'veiculo sim: {vs}')
         print(f'veiculo nao: {vn}')
+
+    if event == 'deletar':
+        n = values['linha1']
+        
+        cursor = conexao.cursor()
+        delete = f'DELETE FROM morador WHERE nome = "{n}"'
+        
+        cursor.execute(delete)
+        conexao.commit()
+        print('Dado excluido')
+      
+
 
             
             
