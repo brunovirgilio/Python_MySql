@@ -9,8 +9,8 @@ layout = [
     [sg.Text('Qnt de moradores', size=(16,0)),sg.Input(key='linha3')],
     [sg.Text('Possui veículo?', size=(16,0))],
     [sg.Checkbox('Sim',key='sim'),sg.Checkbox('Não',key='nao')],
-    [sg.Button('Incluir',key='incluir'), sg.Button('Deletar',key='deletar'), sg.Button('Exibir Lista',key='exibir')],
-    [sg.Output(size=(60,10))]
+    [sg.Button('Incluir',key='incluir'), sg.Button('Deletar',key='deletar'), sg.Button('Atualizar',key='alterar'),sg.Button('Exibir Lista',key='exibir'),sg.Button('Limpar Tela',key='limpar'), ],
+    [sg.Output(size=(60,10), key ='_output_')]
     ]
 #janela
 janela = sg.Window('Lista de Moradores').layout(layout)
@@ -54,14 +54,29 @@ while True:
         n = values['linha1']
         
         cursor = conexao.cursor()
-        exibe = ' SELECT * FROM morador'
+        exibe = ' SELECT nome,apt,qnt,vsim from morador'
         
         cursor.execute(exibe)
         resultado = cursor.fetchall()
         
-        print('Lista de Moradores')
+        print('Lista de Moradores(Nome/Apt/Qnt/carro):')
         for c in resultado :
             print(c)
+    
+    if event == 'limpar':
+        janela.FindElement('_output_').Update(' ')
+
+    if event == 'alterar':
+        n = values['linha1']
+        a = values['linha2']
+        
+        cursor = conexao.cursor()
+        altere = f'UPDATE morador SET nome ="{n}" WHERE apt ="{a}"'
+        
+        cursor.execute(altere)
+        conexao.commit()
+        print('Dado atualizado')
+        
       
 
 
