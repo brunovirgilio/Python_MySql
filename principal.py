@@ -19,18 +19,19 @@ while True:
     event, values = janela.Read()
     if event == sg.WIN_CLOSED:
         break
-        
+    
+    #try:   
     if event == 'incluir':
         n = values['linha1']
         a = values['linha2']
         q = values['linha3']
         vs = values['sim']
         vn = values['nao']
-        
+                
         cursor = conexao.cursor()
         incluir = 'INSERT INTO morador(nome, apt, qnt, vsim,vnao)VALUES(%s, %s, %s, %s, %s)'
-        valor =(str(n),str(a),str(q),bool(vs),bool(vn))
-
+        valor =(int(n),str(a),str(q),bool(vs),bool(vn))
+        
         cursor.execute(incluir,valor)
         conexao.commit()
         print('CARREGAMENTO CONCLUÍDO')
@@ -39,6 +40,16 @@ while True:
         print(f'qnt: {q}')
         print(f'veiculo sim: {vs}')
         print(f'veiculo nao: {vn}')
+    
+    #except (ValueError):
+        #print('FALHA: Verifique se o tipo da variável esta correto')
+    
+    #except (NameError):
+        #print('FALHA: Verifique se a variável usada esta correspondente a declarada')
+    
+    #except Exception as erro:
+        #print('FALHA: Foi encontrada a classe de erro abaixo:')
+        #print(erro.__class__)
 
     if event == 'deletar':
         n = values['linha1']
